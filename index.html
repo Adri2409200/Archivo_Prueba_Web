@@ -1,46 +1,160 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licor Simple</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-licor {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), 
+                        url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+        }
+        .card-img-licor {
+            height: 200px;
+            object-fit: cover;
+        }
+        .btn-licor {
+            background-color: #2C3E50;
+            color: white;
+        }
+        .btn-licor:hover {
+            background-color: #1A252F;
+            color: white;
+        }
+        .categoria-btn.active {
+            background-color: #3498DB !important;
+            border-color: #3498DB !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                🍷 Licor Simple
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#productos">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#carrito">Carrito</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+ <!-- Carrusel -->
+    <div id="inicio" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-licor d-flex align-items-center justify-content-center text-white text-center">
+                    <div>
+                        <h1 class="display-4">Licorería Premium</h1>
+                        <p class="lead">Las mejores bebidas para cada ocasión</p>
+                        <button id="btnVerProductos" class="btn btn-licor btn-lg">Ver Productos</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-licor d-flex align-items-center justify-content-center text-white text-center">
+                    <div>
+                        <h1 class="display-4">Envío Gratis</h1>
+                        <p class="lead">En compras mayores a $50</p>
+                        <button id="btnOfertas" class="btn btn-licor btn-lg">Ver Ofertas</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#inicio" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#inicio" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
+    <!-- Productos con Cards -->
+    <section id="productos" class="container py-5">
+        <h2 class="text-center mb-4">Nuestros Productos</h2>
+        
+        <!-- Filtros por categoría -->
+        <div class="mb-4 text-center">
+            <button class="btn btn-outline-primary categoria-btn active" data-categoria="todos">Todos</button>
+            <button class="btn btn-outline-primary categoria-btn" data-categoria="whisky">Whisky</button>
+            <button class="btn btn-outline-primary categoria-btn" data-categoria="ron">Ron</button>
+            <button class="btn btn-outline-primary categoria-btn" data-categoria="vodka">Vodka</button>
+        </div>
+        
+        <div class="row" id="productosGrid">
+            <!-- Las cards se generadas  con JavaScript -->
+        </div>
+    </section>
 
-    <body>
-        <header>
-        <h1>Menu.</h1>
-        </header>
-        <main>
-            <h1>Esto es una prueba</h1>
-        <h2>esto solo apareceg</h2>
+    <!-- Carrito -->
+    <section id="carrito" class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Tu Carrito</h2>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Productos seleccionados:</h5>
+                            <ul id="listaCarrito" class="list-group mb-3">
+                                <li class="list-group-item text-muted">Carrito vacío</li>
+                            </ul>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4>Total: $<span id="totalCarrito">0</span></h4>
+                                <div>
+                                    <button id="btnVaciar" class="btn btn-outline-danger me-2">Vaciar</button>
+                                    <button id="btnComprar" class="btn btn-success">Comprar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Ofertas Especiales</h5>
+                            <p>Whisky + 2 vasos de cristal</p>
+                            <button id="btnOfertaWhisky" class="btn btn-primary btn-sm">Agregar Oferta $45</button>
+                            
+                            <hr>
+                            
+                            <p>Descuento: 10% en compras mayores a $100</p>
+                            <button id="btnDescuento" class="btn btn-warning btn-sm">Aplicar Descuento</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-3">
+        <div class="container text-center">
+            <p>🍷 Licor Simple - © 2023 - Venta responsable a mayores de 18 años</p>
+            <p>Horario: Lunes a Sábado 10am-10pm | Tel: 555-9876</p>
+        </div>
+    </footer>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Nuestro JS -->
+    <script src="licoreria.js"></script>
+</body>
 </html>
+   
